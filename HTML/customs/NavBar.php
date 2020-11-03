@@ -1,6 +1,10 @@
 <?php
 
 class NavBar extends Element {
+
+    public const CLASS_NAME = "nav-bar";
+    public const TAG = 'div';
+
     private $count;
     private array $elems = [];
 
@@ -12,7 +16,7 @@ class NavBar extends Element {
         foreach($elements as $index => $element)
             $this->elems[$element] = $refs[$index];
         
-        $this->addAttribute('class', 'navBar');
+        $this->addAttribute('class', NavBar::CLASS_NAME);
         $this->prepareElements();
     }
 

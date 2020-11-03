@@ -138,10 +138,11 @@ class Element {
      * @return  string Stringified Element
      */
     private function stringify() {
-        $str =  $this->tag() .
-                $this->content .
-                $this->stringifiedChildren() .
-                $this->endTag();
+        $str = '' .
+            $this->tag() .
+            $this->content .
+            $this->stringifiedChildren() .
+            $this->endTag();
         return $str;
     }
 
