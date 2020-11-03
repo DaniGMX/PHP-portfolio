@@ -137,7 +137,7 @@ class Element {
      * Converts this Element's data to an echoable string
      * @return  string Stringified Element
      */
-    private function stringify() {
+    public function stringify() {
         $str = '' .
             $this->tag() .
             $this->content .
@@ -183,7 +183,7 @@ class Element {
      * Sets the tag with all the attributes
      * @return  string Full tag of this Element
      */
-    private function tag() {
+    public function tag() {
         $str = '<' . $this->tag;
         if (!empty($this->attributes)) $str .= $this->stringifiedAttributes();
         if (!empty($this->styles)) $str .= $this->stringifiedStyles();
@@ -196,7 +196,7 @@ class Element {
      * Sets the ending tag
      * @return  string Ending tag of this element
      */
-    private function endTag() {
+    public function endTag() {
         return '</' . $this->tag . '>';
     }
 }

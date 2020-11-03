@@ -4,10 +4,11 @@ class Modifier {
     public $to;
     public $modifiers;
 
-    public function __construct($to)
+    public function __construct($to, $modifiers = [])
     {
         $this->tag = $to;
         $this->to = $to;
+        $this->modifiers = new ArrayOfModifiers($modifiers);
     }
 
     public function addModifiers($modifiers) {

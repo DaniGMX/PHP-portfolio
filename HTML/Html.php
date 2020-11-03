@@ -1,31 +1,30 @@
 <?php
 
-include 'Config.php';
+include_once 'Config.php';
+include_once 'Element.php';
 
 class Html {
 
-    // Attributes
-    private static $html;
+    public static function make(string $title, ArrayOfElements $bodyElements, Css $css) {
+        // create new html element that will hold the page
+        $html = new Element('html');
 
-    public static function make(string $title, ArrayOfElements $bodyElements) {
-        Html::$html = new Element('html');
+        // create all the base html elements
+        $headElement = new Element('head');
+        $titleElement = new Element('title', $title);
+        $styleElement = $css;
+        $bodyElement = new Element('body');
 
-        $title = new Element('title', $title);
+        // create the new title element so we can insert the $title parameter
+        $headElement->appendChild($titleElement);
+        $headElement->appendChild($styleElement);
 
-        $head = new Element('head');
-        $head->appendChild($title);
+        $bodyElement->appendChildren($bodyElements);
 
-        $style = new Element('style', '', ['href' => '.././CSS/index.css']);
-        $head->appendChild($style);
+        $html->appendChildren(new ArrayOfElements([$headElement, $bodyElement]));
 
-        $body = new Element('body');
-        $body->addStyles(Config::body());
-        $body->appendChildren($bodyElements);
-
-        Html::$html->appendChild($head);
-        Html::$html->appendChild($body);
-
-        Html::$html->echo();
+        // echo the html
+        $html->echo();
     }
 }
 
