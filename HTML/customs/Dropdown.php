@@ -6,9 +6,9 @@ class Dropdown extends Element{
     public const TAG = 'div';
     public const CLASS_BUTTON = 'drop_button';
     
-    private Element $button;
-    private array $dropped = [];
-    private array $refs = [];
+    private $button;
+    private $dropped = [];
+    private $refs = [];
 
     public function __construct(string $content, array $droppedContents, array $refs)
     {

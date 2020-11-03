@@ -2,7 +2,7 @@
 
 class Css extends Element{
 
-    private array $modifiers;
+    private $modifiers;
 
     public function __construct(array $modifiers)
     {

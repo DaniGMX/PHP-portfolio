@@ -6,7 +6,7 @@ class NavBar extends Element {
     public const TAG = 'div';
 
     private $count;
-    private array $elems = [];
+    private $elems = [];
 
     public function __construct($elements, $refs)
     {

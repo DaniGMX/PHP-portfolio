@@ -1,8 +1,8 @@
 <?php
 
 class Modifier {
-    public string $to;
-    public array $modifiers;
+    public $to;
+    public $modifiers;
 
     public function __construct($to)
     {

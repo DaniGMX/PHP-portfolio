@@ -3,11 +3,11 @@
 class Element {
     
     // Properties
-    private string $tag;
-    private string $content;
-    private ArrayOfElements $children;
-    private array $attributes;
-    private array $styles;
+    private $tag;
+    private $content;
+    private $children;
+    private $attributes;
+    private $styles;
 
     // Initializer
     function __construct(string $tag = 'div', $content = '', $attributes = [], $styles = [])
