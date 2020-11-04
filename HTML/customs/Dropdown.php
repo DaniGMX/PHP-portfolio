@@ -1,60 +1,42 @@
 <?php
 
-class Dropdown extends Element{
-    
-    public const CLASS_NAME = 'dropdown';
-    public const TAG = 'div';
-    public const CLASS_BUTTON = 'drop_button';
-    
-    private $button;
-    private $dropped = [];
-    private $refs = [];
+class Dropdown extends Element {
+    private const TAG_DROPDOWN = "li";
+    private const CLASS_DROPDOWN = "dropdown";
+    private const CLASS_DROPDOWN_BUTTON = "dropbtn";
 
-    public function __construct(string $content, array $droppedContents, array $refs)
-    {
-        // call to the Element constructor
-        parent::__construct(Dropdown::TAG, $content, ['class', Dropdown::CLASS_NAME]);
+    private const TAG_DROPDOWN_CONTENT = 'div';
+    private const CLASS_DROPDOWN_CONTENT = "dropdown-content";
 
-        // make the button and append it first
-        $this->button = new Element('button', $content, ['class' => Dropdown::CLASS_BUTTON]);
-        $this->button->addStyles(Config::DropdownButtonStyle());
-        $this->appendChild($this->button);
+    public function __construct(string $name, array $subNames, array $hrefs) {
+        // make this the li element that will be held by the navbar
+        parent::__construct(Dropdown::TAG_DROPDOWN, '', ['class' => Dropdown::CLASS_DROPDOWN]);
 
-        // make the elements that will be dropped and append them to this element
-        $droppedHolder = new Element('div', '', ['class' => 'dropdown-content']);
-        foreach ($droppedContents as $i => $droppedContent)  {
-            $this->dropped[] = $this->makeDroppedItem($droppedContent, $refs[$i]);
-        }
-        $droppedHolder->addStyles(Config::DropdownContent());
-        $droppedHolder->appendChildren(new ArrayOfElements($this->dropped));
-        $this->appendChild($droppedHolder);
+        // append the base button for the elements to pop from
+        $this->appendChild(new Element('a', $name, ['herf' => 'javascript:void(0)', 'class' => Dropdown::CLASS_DROPDOWN_BUTTON]));
         
-        // Lastly add the config styles for the Dropdown
-        $this->addStyles(Config::DropdownStyle());
-    }
+        // make the dropdown elements with the given parameters
+        $dropdownElements = new Element(Dropdown::TAG_DROPDOWN_CONTENT, '', ['class' => Dropdown::CLASS_DROPDOWN_CONTENT]);
+        foreach ($subNames as $index => $subName) {
+            $dropdownElements->appendChild(new Element('a', $subName, ['href' => $hrefs[$index]]));
+        }
 
-    private function makeDroppedItem($content, $ref) {
-        $newDropElement = new Element('a', $content);
-        $newDropElement->addStyles(Config::DropdownContentA());
-        $newDropElement->addAttribute('href', $ref);
-        return $newDropElement;
+        // append the dropdown elements that will be held
+        $this->appendChild($dropdownElements);
     }
-
 }
 
-/*
-
-<div class="dropdown">
-    <button class="dropbtn">Dropdown 
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a href="#">Link 1</a>
-      <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
-    </div>
-  </div> 
-
-*/
+/**
+ * Array Of Dropdowns class ensure these kind of arrays to hold
+ * arrays that only contain Elements.
+ */
+class ArrayOfDropdowns extends ArrayObject {
+    public function offsetSet($key, $val) {
+        if ($val instanceof Dropdown) {
+            return parent::offsetSet($key, $val);
+        }
+        throw new InvalidArgumentException('Value must be an Element');
+    }
+}
 
 ?>

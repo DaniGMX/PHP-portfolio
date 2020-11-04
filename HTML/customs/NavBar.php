@@ -2,28 +2,13 @@
 
 class NavBar extends Element {
 
-    public const CLASS_NAME = "nav-bar";
-    public const TAG = 'div';
+    private const CLASS_NAME = "navbar";
+    private const TAG_NAME = 'ul';
 
-    private $count;
-    private $elems = [];
-
-    public function __construct($elements, $refs)
+    public function __construct(ArrayOfDropdowns $dropdowns)
     {
-        parent::__construct();
-        
-        foreach($elements as $index => $element)
-            $this->elems[$element] = $refs[$index];
-        
-        $this->addAttribute('class', NavBar::CLASS_NAME);
-        $this->prepareElements();
-    }
-
-    private function prepareElements() {
-        foreach ($this->elems as $content => $href) {
-            $newElem = new Element('a', $content, ['href' => $href]);
-            $this->appendChild($newElem);
-        }
+        parent::__construct(NavBar::TAG_NAME, '', ['class' => NavBar::CLASS_NAME]);
+        $this->appendChildren(new ArrayOfElements($dropdowns));
     }
 }
 

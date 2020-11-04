@@ -4,7 +4,7 @@ include '.\customs\Directory.php';
 include '.\customs\File.php';
 
 class Tree {
-    public TreeNode $root;
+    public $root;
 
     public function find(string $path) {
 
@@ -20,9 +20,9 @@ class Tree {
 }
 
 class TreeNode {
-    private string $path;
-    public ArrayOfDirectories $dirs;
-    public ArrayOfFiles $files;
+    private $path;
+    public $dirs;
+    public $files;
 }
 
 ?>
