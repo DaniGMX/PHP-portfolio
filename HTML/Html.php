@@ -5,7 +5,7 @@ include_once 'Element.php';
 
 class Html {
 
-    public static function make(string $title, ArrayOfElements $bodyElements, Css $css) {
+    public static function make(string $title, ArrayOfElements $bodyElements, Style $css) {
         // create new html element that will hold the page
         $html = new Element('html');
 

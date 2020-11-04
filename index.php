@@ -1,11 +1,12 @@
 <?php
 
 include_once './HTML/Html.php';
-include_once './HTML/Css.php';
 include_once './HTML/Element.php';
-include_once './HTML/Modifier.php';
-include_once './HTML/customs/NavBar.php';
-include_once './HTML/customs/Dropdown.php';
+include_once './HTML/Styles/Style.php';
+include_once './HTML/Styles/Modifier.php';
+include_once './HTML/Customs/NavBar/NavBar.php';
+include_once './HTML/Customs/NavBar/Dropdown.php';
+include_once './HTML/Customs/Tree/Tree.php';
 
 //require '.\css\style.css';
 
@@ -22,7 +23,6 @@ $refs = [];
 for ($i = 0; $i < $exerciseCount; $i++)
     $refs[$i] = 'old-exercises\\' . $exerciseDirs[$i] . '\\exercises-' . ($i + 1) . '.php';
 
-
 // test dropdown
 
 // OLD //
@@ -30,22 +30,26 @@ for ($i = 0; $i < $exerciseCount; $i++)
 
 
 // styles
-$css = new Css();
-$css->addModifiers(Config::BodyCSS());
-$css->addModifiers(Config::NavbarCSS());
+$style = new Style();
+$style->addModifiers(Config::BodyCSS());
+$style->addModifiers(Config::NavbarCSS());
 
 // elements
 $newBody = new ArrayOfElements();
 $navbar = new NavBar(new ArrayOfDropdowns([
-        new Dropdown('caca', ['caquita', 'lmaos'], ['#', '#']),
-        new Dropdown('aaaee', ['brainpower', 'dindong'], ['#', '#']),
+        new Dropdown('xdxdxdxdx', ['uwu', 'lmaos'], ['#', '#']),
+        new Dropdown('uwu', ['brainpower', 'dindong'], ['#', '#']),
         new Dropdown('math', ['rule 34', 'feet'], ['#', '#'])
     ])
 );
 
+$testTree = new Tree('Exercises');
+
 $newBody[] = $navbar;
 // html make
-Html::make('PAPI - Daniel GM', $newBody, $css);
+Html::make('PAPI - Daniel GM', $newBody, $style);
+
+//scanNewExercises();
 
 print("<pre>".print_r($_SERVER, true)."</pre>");
 
@@ -57,7 +61,8 @@ function scanNewExercises() {
     $exercisesRefs = [];
     
     foreach ($unitDirNames as $unitDir) {
-        $allUnit1Dirs = scandir($unitDir, SCANDIR_SORT_DESCENDING);
+        echo $unitDir . "\n";
+        $allUnit1Dirs = scandir($_SERVER['REQUEST_URI'] . 'exercises/' . $unitDir, SCANDIR_SORT_DESCENDING);
     }
 }
 

@@ -1,8 +1,6 @@
 <?php
 
-include_once 'Element.php';
-
-class Css extends Element{
+class Style extends Element{
 
     private $modifiers;
 

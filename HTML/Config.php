@@ -1,8 +1,5 @@
 <?php
 
-include_once 'Css.php';
-include_once 'Element.php';
-
 class Config {
 
     public static function BodyCSS() {
@@ -16,7 +13,7 @@ class Config {
     ]);
     }
 
-    public static function navBarCSS() {
+    public static function NavBarCSS() {
         return new ArrayOfModifiers ([
             new Modifier('ul', [
                 'list-style-type' => 'none',
