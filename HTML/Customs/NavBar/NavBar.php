@@ -1,7 +1,6 @@
 <?php
 
 class NavBar extends Element {
-
     private const CLASS_NAME = "navbar";
     private const TAG_NAME = 'ul';
 

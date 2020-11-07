@@ -4,7 +4,6 @@ class Dropdown extends Element {
     private const TAG_DROPDOWN = "li";
     private const CLASS_DROPDOWN = "dropdown";
     private const CLASS_DROPDOWN_BUTTON = "dropbtn";
-
     private const TAG_DROPDOWN_CONTENT = 'div';
     private const CLASS_DROPDOWN_CONTENT = "dropdown-content";
 
