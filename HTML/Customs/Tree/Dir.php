@@ -21,7 +21,7 @@ class Dir extends Route{
         $this->scan();
     }
 
-    private function scan() {
+    public function scan() {
         // scan the current directory and take out the current and parent directories
         $allRoutes = scandir($this->path, SCANDIR_SORT_DESCENDING);
         $subRoutes = array_reverse(array_diff($allRoutes, array('.', '..')));
