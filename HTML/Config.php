@@ -2,6 +2,28 @@
 
 class Config {
 
+    public static function TreeCSS() {
+        return new ArrayOfModifiers ([
+            new Modifier('div.tree', [
+                'background-color' => '#e1aff0',
+                'height' => '100%',
+                'width' => '25%',
+                'position' => 'fixed',
+                'overflow-y' => 'auto',
+                'left' => '0',
+            ]),
+            new Modifier('ul.dir', [
+                'list-style-type' => '"📁"',
+                'font-size' => '14px',
+            ]),
+            new Modifier('li.file', [
+                'list-style-type' => '"📄"',
+                'font-size' => '14px',
+
+            ]),
+        ]);
+    }
+    
     public static function BodyCSS() {
         return new ArrayOfModifiers ([
             new Modifier('body', [
@@ -10,19 +32,19 @@ class Config {
                 'margin' => '0',
                 'padding' => '0'
             ]),
-    ]);
+        ]);
     }
 
     public static function NavBarCSS() {
         return new ArrayOfModifiers ([
-            new Modifier('ul', [
+            new Modifier('ul.navbar', [
                 'list-style-type' => 'none',
                 'margin' => '0',
                 'padding' => '0',
                 'overflow' => 'hidden',
-                'background-color' => '#333'
+                'background-color' => '#000'
             ]),
-            new modifier('li', [
+            new modifier('li.dropdown', [
                 'float' => 'left'
             ]),
             new Modifier('li a, .dropbtn', [
