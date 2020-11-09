@@ -33,7 +33,9 @@ class Tree extends Element {
 
         // traverse files
         foreach ($dir->files as $subFile) {
-            $dirList[] = new Element('li', $subFile->name, ['class' => 'file']);
+            $dirList[] = (new Element('li', ''/*$subFile->name*/, ['class' => 'file']))->appendChild(
+                new Element('a', $subFile->name, ['class' => 'file', 'href' => str_replace(Tree::Root(), "", $subFile->path)])
+            );
         }
 
         $dirUList->appendChildren($dirList);

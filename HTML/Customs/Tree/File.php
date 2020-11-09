@@ -1,9 +1,22 @@
 <?php
 
 class File extends Route{
+
+    private $content;
+
     public function __construct(string $name, string $path, Route $parent = null)
     {
         parent::__construct($name, $path, $parent);
+        $this->readFile();
+    }
+
+    private function readFile() {
+        $this->content = htmlspecialchars(file_get_contents($this->path));
+        //var_dump($this->content);
+    }
+
+    public function getContents() {
+        return $this->content;
     }
 }
 

@@ -2,6 +2,30 @@
 
 class Config {
 
+    public static function ContentsCSS() {
+        return new ArrayOfModifiers ([
+            new Modifier('div.contents', [
+                'background-color' => '#1f1f1f',
+                'height' => '100%',
+                'width' => '75%',
+                'position' => 'fixed',
+                'overflow-y' => 'auto',
+                'right' => '0',
+            ]),
+            new Modifier('ul.dir', [
+                'list-style-type' => '"📁"',
+                'font-size' => '14px',
+            ]),
+            new Modifier('li.file', [
+                'list-style-type' => '"📄"',
+                'font-size' => '14px',
+            ]),
+            new modifier('.file a:hover', [
+                'color' => '#fdfdfd',
+            ]),
+        ]);
+    }
+
     public static function TreeCSS() {
         return new ArrayOfModifiers ([
             new Modifier('div.tree', [
@@ -13,6 +37,7 @@ class Config {
                 'left' => '0',
             ]),
             new Modifier('ul.dir', [
+                'cursor' => 'default',
                 'list-style-type' => '"📁"',
                 'font-size' => '14px',
             ]),
@@ -20,6 +45,11 @@ class Config {
                 'list-style-type' => '"📄"',
                 'font-size' => '14px',
 
+            ]),
+            new Modifier('li a.file', [
+                'display' => 'inline-block',
+                'text-decoration' => 'none',
+                'color' => 'black',
             ]),
         ]);
     }
@@ -39,6 +69,7 @@ class Config {
         return new ArrayOfModifiers ([
             new Modifier('ul.navbar', [
                 'list-style-type' => 'none',
+                'cursor' => 'default',
                 'margin' => '0',
                 'padding' => '0',
                 'overflow' => 'hidden',
@@ -47,14 +78,14 @@ class Config {
             new modifier('li.dropdown', [
                 'float' => 'left'
             ]),
-            new Modifier('li a, .dropbtn', [
+            new Modifier('li a.dropbtn', [
                 'display' => 'inline-block',
                 'color' => 'white',
                 'text-align' => 'center',
                 'padding' => '14px 16px',
                 'text-decoration' => 'none'
             ]),
-            new modifier('li a:hover, .dropdown:hover .dropbtn', [
+            new modifier('li.dropdown a:hover, .dropdown:hover .dropbtn', [
                 'background-color' => 'purple'
             ]),
             new modifier('li .dropdown', [

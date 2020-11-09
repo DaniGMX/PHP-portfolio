@@ -5,7 +5,9 @@ include_once 'Element.php';
 
 class Html {
 
-    public static function make(string $title, ArrayOfElements $bodyElements, Style $css) {
+    public $htmlStr;
+
+    public function __construct(string $title, ArrayOfElements $bodyElements, Style $css) {
         // create new html element that will hold the page
         $html = new Element('html');
 
@@ -24,7 +26,7 @@ class Html {
         $html->appendChildren(new ArrayOfElements([$headElement, $bodyElement]));
 
         // echo the html
-        $html->echo();
+        $this->htmlStr = $html->stringify();
     }
 }
 
