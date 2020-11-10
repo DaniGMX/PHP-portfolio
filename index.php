@@ -16,12 +16,4 @@ include_once './HTML/Customs/ContentArea/Contents.php';
 
 echo Web::make('DaniGM Portfolio');
 
-function runMyFunction() {
-    echo 'I just ran a php function';
-}
-
-if (isset($_GET['hello'])) {
-    runMyFunction();
-}
-
 ?>

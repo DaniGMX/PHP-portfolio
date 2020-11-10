@@ -57,6 +57,19 @@ class Dir extends Route{
         return $found;
     }
 
+    public function findFileByPath(string $path) {
+        $found = null;
+        foreach ($this->files as $file) {
+            if ($file->path == $path)
+                $found = $file;
+        }
+        if ($found != null) return $found;
+        foreach ($this->directories as $subDirectory) {
+            $found = $subDirectory->findfileByPath($path);
+        }
+        return $found;
+    }
+
     public function hasFile(string $fileName) {
         foreach ($this->files as $file) {
             if ($file->name == $fileName)

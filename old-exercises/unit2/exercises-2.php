@@ -45,7 +45,7 @@ HTML::append(
     HTML::makeElement('div', [
         HTML::makeElement('h2', ["Exercise 3"]),
         HTML::makeElement('h3', ["What can a variable store?  Show the four different scalar types using var_dump."]),
-        HTML::makeElement('p', ["{$integer}" . JL . "{$float}" . JL . "{$string}" . JL . "{$boolean}"])
+        HTML::makeElement('p', ["{$integer}" . "<br>" . "{$float}" . "<br>" . "{$string}" . "<br>" . "{$boolean}"])
     ])
 );
 HTML::separate();
@@ -161,11 +161,12 @@ HTML::append(
 HTML::separate();
 
 // exercise 15
+$oneToTen = array(1, 2, 3 ,4 ,5 , 6, 7, 8, 9 ,10);
 $three = 3;
 $threeTable = array();
 for ($i = 0; $i < 10; ++$i){
     $threeTable[] = HTML::makeElement('tr', [
-        HTML::makeElement('td', [ONE_TO_TEN[$i]]),
+        HTML::makeElement('td', [$oneToTen[$i]]),
         HTML::makeElement('td', [$three * ($i + 1)])
     ]);
 }

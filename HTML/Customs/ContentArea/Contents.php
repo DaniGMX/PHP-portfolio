@@ -4,10 +4,12 @@ class Contents extends Element {
 
     private $resource;
     
-    public function __construct($resource)
+    public function __construct($newContent)
     {
         parent::__construct('div', '', ['class' => 'contents']);
-        $this->resource = $resource;
+        $this->appendChild(
+            new Element('pre', $newContent)
+        );
     }
 
 }

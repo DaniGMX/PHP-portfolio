@@ -12,16 +12,11 @@ class Config {
                 'overflow-y' => 'auto',
                 'right' => '0',
             ]),
-            new Modifier('ul.dir', [
-                'list-style-type' => '"📁"',
-                'font-size' => '14px',
-            ]),
-            new Modifier('li.file', [
-                'list-style-type' => '"📄"',
-                'font-size' => '14px',
-            ]),
-            new modifier('.file a:hover', [
-                'color' => '#fdfdfd',
+            new Modifier('div pre', [
+                'background-color' => 'white',
+                'padding' => '20 20 20 20',
+                'overflow-y' => 'auto',
+                'font-family' => 'arial'
             ]),
         ]);
     }

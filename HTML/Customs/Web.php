@@ -7,14 +7,15 @@ class Web {
     
     private static $navbar;
     private static $dropdowns;
-    private static $root;
     private static $tree;
-    private static $contents;
-    private static $fileContents = [];
+    
+    public static $root;
+    public static $contents;
+    public static $fileContents = [];
     
     private const EXERCISES = 'Exercises';
 
-    public static function make(string $webTitle) {
+    public static function make(string $webTitle, $unit = null, $exercise = null) {
         // make the CSS styles
         Web::$css = new Style();
         Web::$css->addModifiers(Config::BodyCSS());
@@ -23,7 +24,7 @@ class Web {
         Web::$css->addModifiers(Config::ContentsCSS());
 
         // make the root
-        Web::$root = new Dir(Web::EXERCISES, str_replace('index.php', '', Tree::Path()) . (Web::EXERCISES));
+        Web::$root = new Dir(Web::EXERCISES, str_replace(array('index.php', '?'), '', Tree::Root() . Tree::Uri()) . (Web::EXERCISES));
         
         // make the navigation bar
         Web::$dropdowns = new ArrayOfDropdowns();
@@ -31,24 +32,32 @@ class Web {
             $refs = [];
             $i = 1;
             foreach ($unit->directories as $exercise) {
-                // OLD
                 $exerciseFile = $exercise->findFile('exercise' . $i . '.php');
-                //$thisRef = str_replace(Tree::Path(), "", $exerciseFile->path);
-                $req = str_replace(Tree::Path(), "", $exerciseFile->path);
-                $refs[] = 'index.php?' . str_replace('.php', '', $unit->name . $exerciseFile->name) . '=true'; // str_replace('.php', '', $exerciseFile->name) . $reqGet;
-                Web::$fileContents[$req] = $exerciseFile->getContents();
+                $req =
+                    'index.php?' .
+                    'unit=' . str_replace('.php', '', str_replace('Unit', '', $unit->name)) . '&' .
+                    'exercise=' . str_replace('.php', '', str_replace('Exercise', '', $exercise->name)) . '&' .
+                    'path=' . str_replace([Tree::Root(), Tree::Uri()], '', $exerciseFile->path);
+                $refs[] = $req;
+                Web::$fileContents[$exerciseFile->path] = $exerciseFile->getContents();
+                //echo $exerciseFile->path;
                 $i++;
-                // NEW gotta call change contents with href => $exercise.php . '?' . "/$unit->name . '=' . $exercise->name
             }
             Web::$dropdowns[] = new Dropdown($name, $unit->getSubDirNames(), $refs);
         }
         Web::$navbar = new NavBar(Web::$dropdowns);
+
+        //var_dump(Web::$fileContents);
         
         // make the tree from the Dir
         Web::$tree = new Tree(Web::$root);
 
         // make the content area
-        Web::$contents = new Contents(null);
+        $newContents = null;
+        if (isset($_GET['unit']) && isset($_GET['exercise']) && isset($_GET['path'])) {
+            $newContents = Web::loadExercise($_GET['unit'], $_GET['exercise'], $_GET['path']);
+        }
+        Web::$contents = $newContents ? $newContents : new Contents('Click on a file to see its contents!');
 
         // make the body elements
         Web::$body = new ArrayOfElements();
@@ -59,6 +68,14 @@ class Web {
         // make the page
         return (new Html($webTitle, Web::$body, Web::$css))->htmlStr;
     }
+
+    private static function loadExercise($unit, $exercise, $path) {
+        $str = Web::$fileContents[Tree::Uri() . $path];
+        return new Contents($str);
+    }
 }
+
+
+
 
 ?>
